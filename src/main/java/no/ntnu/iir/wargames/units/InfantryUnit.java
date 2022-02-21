@@ -37,7 +37,7 @@ public class InfantryUnit extends Unit {
 
   /**
    * Calculates the attack bonus for the unit.
-   * Temporarly set to return a static attack bonus.
+   * Temporarily set to return a static attack bonus.
    *
    * @return 2
    */

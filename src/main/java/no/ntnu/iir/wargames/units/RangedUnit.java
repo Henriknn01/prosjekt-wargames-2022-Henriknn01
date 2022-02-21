@@ -40,7 +40,7 @@ public class RangedUnit extends Unit {
 
   /**
    * Calculates the attack bonus for the unit.
-   * Temporarly set to return a static attack bonus.
+   * Temporarily set to return a static attack bonus.
    *
    * @return 3
    */
@@ -60,17 +60,20 @@ public class RangedUnit extends Unit {
   public int getResistBonus() {
     switch (this.attackedCount) {
       // First attack
-      case 0:
+      case 0 -> {
         this.attackedCount++;
         return 6;
+      }
       // Second attack
-      case 1:
+      case 1 -> {
         this.attackedCount++;
         return 4;
+      }
       // Default - base resist
-      default:
+      default -> {
         this.attackedCount++;
         return 2;
+      }
     }
   }
 }
