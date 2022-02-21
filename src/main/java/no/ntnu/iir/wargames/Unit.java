@@ -7,10 +7,10 @@ package no.ntnu.iir.wargames;
  * @version 20.02.2022
  */
 public abstract class Unit {
-    private String name;
+    private final String name;
     private int health;
-    private int attack;
-    private int armor;
+    private final int attack;
+    private final int armor;
 
     /**
      * Unit constructor.
