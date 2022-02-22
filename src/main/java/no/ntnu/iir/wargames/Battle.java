@@ -86,7 +86,7 @@ public class Battle {
   public String toString() {
     return "Battle{" +
         "armyOne=" + armyOne.getName() + ", armyOne unit count: " + armyOne.getAllUnits().size() +
-        ", armyTwo=" + armyTwo.getName() +", armyTwo unit count: " + armyOne.getAllUnits().size() +
+        ", armyTwo=" + armyTwo.getName() +", armyTwo unit count: " + armyTwo.getAllUnits().size() +
         '}';
   }
 }
