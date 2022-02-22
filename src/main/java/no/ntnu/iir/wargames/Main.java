@@ -47,6 +47,15 @@ public class Main {
     System.out.println(battle);
   }
 
+  /**
+   * Generates a list of units with specified name, health and unit type.
+   *
+   * @param unitSize - amount of units to generate and add to list
+   * @param name - name for the units
+   * @param health - health of the units
+   * @param unitType - the type of unit to generate
+   * @return List of units
+   */
   public static List<Unit> generateUnits(int unitSize, String name, int health, UnitType unitType) {
     ArrayList<Unit> unitList = new ArrayList<>();
 
