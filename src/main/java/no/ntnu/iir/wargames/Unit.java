@@ -8,10 +8,10 @@ package no.ntnu.iir.wargames;
  */
 public abstract class Unit {
   // Class fields
-  private final String name;
+  private String name;
   private int health;
-  private final int attack;
-  private final int armor;
+  private int attack;
+  private int armor;
 
   /**
    * Unit constructor.
@@ -30,7 +30,7 @@ public abstract class Unit {
 
   /**
    * Deals damage to specified unit with the following formula:
-   * health_opponent = health_opponent - ( attack + attackBonus )_this + ( armor + resistBonus)_opponent
+   * health_opponent = health_opponent - ( attack + attackBonus )_this + ( armor + resistBonus)_opponent.
    *
    * @param opponent - unit to attack
    */
