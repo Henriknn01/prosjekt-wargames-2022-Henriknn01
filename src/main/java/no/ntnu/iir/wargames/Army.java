@@ -1,7 +1,7 @@
 package no.ntnu.iir.wargames;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 
@@ -14,7 +14,7 @@ import java.util.Random;
 public class Army {
   // class fields
   private String name;
-  private List<Unit> units;
+  private ArrayList<Unit> units;
   private Random randomNumb;
 
   /**
@@ -25,7 +25,7 @@ public class Army {
    */
   public Army(String name, List<Unit> units) {
     this.name = name;
-    this.units = units;
+    this.units = new ArrayList<>();
     this.randomNumb = new Random();
   }
 
@@ -36,6 +36,7 @@ public class Army {
    */
   public Army(String name) {
     this.name = name;
+    this.units = new ArrayList<>();
     this.randomNumb = new Random();
   }
 
@@ -81,7 +82,7 @@ public class Army {
    * @return true if the army has units
    */
   public boolean hasUnits() {
-    return this.units.size() > 0;
+    return !this.units.isEmpty();
   }
 
   /**
