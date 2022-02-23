@@ -7,6 +7,11 @@ package no.ntnu.iir.wargames;
  * @version 21.02.2022
  */
 public class Main {
+  /**
+   * Main method, responsible for running application.
+   *
+   * @param args - any argument to pass to the application
+   */
   public static void main(String[] args) {
     Army human = new Army("Human army");
     Army orcish = new Army("Orcish horde");

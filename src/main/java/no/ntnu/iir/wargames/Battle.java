@@ -31,9 +31,8 @@ public class Battle {
    */
   public void unitCleanup(Army army, Unit unit) {
     // used try catch, in case of unit not being listed in specified army.
-    // TODO: assess if try catch is necessary
     try {
-      if (unit.getHealth() <= 0 ) {
+      if (unit.getHealth() <= 0) {
         army.remove(unit);
       }
     } catch (Exception e) {
@@ -84,9 +83,11 @@ public class Battle {
    */
   @Override
   public String toString() {
-    return "Battle{" +
-        "armyOne=" + armyOne.getName() + ", armyOne unit count: " + armyOne.getAllUnits().size() +
-        ", armyTwo=" + armyTwo.getName() +", armyTwo unit count: " + armyTwo.getAllUnits().size() +
-        '}';
+    return "Battle{"
+        + "armyOne=" + armyOne.getName()
+        + ", armyOne unit count: " + armyOne.getAllUnits().size()
+        + ", armyTwo=" + armyTwo.getName()
+        + ", armyTwo unit count: " + armyTwo.getAllUnits().size()
+        + '}';
   }
 }

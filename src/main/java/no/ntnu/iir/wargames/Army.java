@@ -10,7 +10,7 @@ import no.ntnu.iir.wargames.units.RangedUnit;
 
 
 /**
- * Army is a collection of units
+ * Army is a collection of units.
  *
  * @author Henrik Norheim Nysæther
  * @version 21.02.2022
@@ -90,7 +90,7 @@ public class Army {
   }
 
   /**
-   * gets all units in the army
+   * gets all units in the army.
    *
    * @return List of units - containing all the units in the army
    */
@@ -99,7 +99,7 @@ public class Army {
   }
 
   /**
-   * get a random unit from the army
+   * get a random unit from the army.
    *
    * @return unit - randomly picked
    */
@@ -126,6 +126,7 @@ public class Army {
         case CAVALRY -> unitList.add(new CavalryUnit(name, health));
         case INFANTRY -> unitList.add(new InfantryUnit(name, health));
         case COMMANDER -> unitList.add(new CommanderUnit(name, health));
+        default -> System.out.println("Invalid unit type.");
       }
     }
 
@@ -139,10 +140,10 @@ public class Army {
    */
   @Override
   public String toString() {
-    return "Army{" +
-        "name: '" + name + '\'' +
-        ", units: " + units.size() +
-        '}';
+    return "Army{"
+        + "name: '" + name + '\''
+        + ", units: " + units.size()
+        + '}';
   }
 }
 

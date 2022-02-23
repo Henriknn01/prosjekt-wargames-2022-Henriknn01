@@ -23,7 +23,7 @@ public class CavalryUnit extends Unit {
    * @param attack - the amount of damage a unit does on attack
    * @param armor - armor bonus for when the unit gets hit
    */
-  public CavalryUnit(String name,int health, int attack, int armor) {
+  public CavalryUnit(String name, int health, int attack, int armor) {
     super(name, health, attack, armor);
   }
 

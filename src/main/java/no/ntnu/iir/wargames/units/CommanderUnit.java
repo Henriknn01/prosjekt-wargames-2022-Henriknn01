@@ -9,7 +9,7 @@ package no.ntnu.iir.wargames.units;
  * @author Henrik Norheim Nysæther
  * @version 21.02.2022
  */
-public class CommanderUnit extends CavalryUnit{
+public class CommanderUnit extends CavalryUnit {
   /**
    * Constructor to set all values for the unit.
    *

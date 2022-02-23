@@ -35,7 +35,11 @@ public abstract class Unit {
    * @param opponent - unit to attack
    */
   public void attack(Unit opponent) {
-    opponent.health -= (this.attack + this.getAttackBonus()) + (opponent.getArmor() + opponent.getResistBonus());
+    opponent.health -= (
+          (this.attack
+          + this.getAttackBonus())
+          + (opponent.getArmor()
+          + opponent.getResistBonus()));
   }
 
   /**
@@ -76,6 +80,7 @@ public abstract class Unit {
 
   /**
    * Returns the current health of the unit.
+   *
    * @param health current health
    */
   public void setHealth(int health) {
@@ -88,11 +93,10 @@ public abstract class Unit {
    * @return unit information
    */
   public String toString() {
-    return ("Name: " + this.name +
-        " | Health: " + this.health +
-        " | Attack: " + this.attack +
-        " | Armor: " + this.armor
-    );
+    return ("Name: " + this.name
+        + " | Health: " + this.health
+        + " | Attack: " + this.attack
+        + " | Armor: " + this.armor);
   }
 
   /**
