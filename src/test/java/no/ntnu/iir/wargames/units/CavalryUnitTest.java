@@ -23,6 +23,8 @@ class CavalryUnitTest {
     void constructorTest() {
         assertEquals(cavalryUnit.getName(), "Test unit");
         assertEquals(cavalryUnit.getHealth(), 100);
+        assertEquals(cavalryUnit.getAttack(), 20);
+        assertEquals(cavalryUnit.getArmor(), 12);
     }
 
     // Checks if the attack bonus is correct on the first attack.
