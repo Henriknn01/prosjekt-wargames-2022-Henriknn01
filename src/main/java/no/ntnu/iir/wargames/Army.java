@@ -142,7 +142,7 @@ public class Army {
    */
   public List<Unit> getInfantryUnits() {
     return this.units.stream()
-            .filter(unit -> unit.getClass().getName().equals("InfantryUnit"))
+            .filter(unit -> unit.getClass().equals(InfantryUnit.class))
             .collect(Collectors.toList());
   }
 
@@ -153,7 +153,7 @@ public class Army {
    */
   public List<Unit> getCavalryUnits() {
     return this.units.stream()
-            .filter(unit -> unit.getClass().getName().equals("CavalryUnit"))
+            .filter(unit -> unit.getClass().equals(CavalryUnit.class))
             .collect(Collectors.toList());
   }
 
@@ -164,7 +164,7 @@ public class Army {
    */
   public List<Unit> getRangedUnit() {
     return this.units.stream()
-            .filter(unit -> unit.getClass().getName().equals("RangedUnit"))
+            .filter(unit -> unit.getClass().equals(RangedUnit.class))
             .collect(Collectors.toList());
   }
 
@@ -175,7 +175,7 @@ public class Army {
    */
   public List<Unit> getCommanderUnits() {
     return this.units.stream()
-            .filter(unit -> unit.getClass().getName().equals("CommanderUnit"))
+            .filter(unit -> unit.getClass().equals(CommanderUnit.class))
             .collect(Collectors.toList());
   }
 
