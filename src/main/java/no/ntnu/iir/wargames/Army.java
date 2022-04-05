@@ -3,6 +3,8 @@ package no.ntnu.iir.wargames;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+
 import no.ntnu.iir.wargames.units.CavalryUnit;
 import no.ntnu.iir.wargames.units.CommanderUnit;
 import no.ntnu.iir.wargames.units.InfantryUnit;
@@ -131,6 +133,50 @@ public class Army {
     }
 
     this.addAll(unitList);
+  }
+
+  /**
+   * gets a list of all infantry units in the army.
+   *
+   * @return list of infantry units
+   */
+  public List<Unit> getInfantryUnits() {
+    return this.units.stream()
+            .filter(unit -> unit.getClass().getName().equals("InfantryUnit"))
+            .collect(Collectors.toList());
+  }
+
+  /**
+   * gets a list of all cavalry units in the army.
+   *
+   * @return list of cavalry units
+   */
+  public List<Unit> getCavalryUnits() {
+    return this.units.stream()
+            .filter(unit -> unit.getClass().getName().equals("CavalryUnit"))
+            .collect(Collectors.toList());
+  }
+
+  /**
+   * gets a list of all ranged units in the army.
+   *
+   * @return list of ranged units
+   */
+  public List<Unit> getRangedUnit() {
+    return this.units.stream()
+            .filter(unit -> unit.getClass().getName().equals("RangedUnit"))
+            .collect(Collectors.toList());
+  }
+
+  /**
+   * gets a list of all commander units in the army.
+   *
+   * @return list of commander units
+   */
+  public List<Unit> getCommanderUnits() {
+    return this.units.stream()
+            .filter(unit -> unit.getClass().getName().equals("CommanderUnit"))
+            .collect(Collectors.toList());
   }
 
   /**
