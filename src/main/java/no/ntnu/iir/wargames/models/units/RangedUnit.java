@@ -1,6 +1,6 @@
-package no.ntnu.iir.wargames.units;
+package no.ntnu.iir.wargames.models.units;
 
-import no.ntnu.iir.wargames.Unit;
+import no.ntnu.iir.wargames.models.Unit;
 
 /**
  * RangedUnit class extends Unit class to create a specialized unit.

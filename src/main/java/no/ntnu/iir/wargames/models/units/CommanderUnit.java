@@ -1,4 +1,4 @@
-package no.ntnu.iir.wargames.units;
+package no.ntnu.iir.wargames.models.units;
 
 /**
  * CommanderUnit class extends CavalryUnit.

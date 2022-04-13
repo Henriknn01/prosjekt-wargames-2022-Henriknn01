@@ -1,14 +1,14 @@
-package no.ntnu.iir.wargames;
+package no.ntnu.iir.wargames.models;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-
-import no.ntnu.iir.wargames.units.CavalryUnit;
-import no.ntnu.iir.wargames.units.CommanderUnit;
-import no.ntnu.iir.wargames.units.InfantryUnit;
-import no.ntnu.iir.wargames.units.RangedUnit;
+import no.ntnu.iir.wargames.models.units.CavalryUnit;
+import no.ntnu.iir.wargames.models.units.CommanderUnit;
+import no.ntnu.iir.wargames.models.units.InfantryUnit;
+import no.ntnu.iir.wargames.models.units.RangedUnit;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 /**
@@ -22,6 +22,7 @@ public class Army {
   private String name;
   private ArrayList<Unit> units;
   private Random randomNumb;
+  private static final Logger logger = LogManager.getLogger(Army.class);
 
   /**
    * Constructor for army class.
@@ -53,6 +54,15 @@ public class Army {
    */
   public String getName() {
     return name;
+  }
+
+  /**
+   * Sets the army's name.
+   *
+   * @param name - new army name
+   */
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**
@@ -121,18 +131,42 @@ public class Army {
    */
   public void generateUnits(int unitSize, String name, int health, UnitType unitType) {
     ArrayList<Unit> unitList = new ArrayList<>();
-
     for (int i = 0; i < unitSize; i++) {
-      switch (unitType) {
-        case RANGED -> unitList.add(new RangedUnit(name, health));
-        case CAVALRY -> unitList.add(new CavalryUnit(name, health));
-        case INFANTRY -> unitList.add(new InfantryUnit(name, health));
-        case COMMANDER -> unitList.add(new CommanderUnit(name, health));
-        default -> System.out.println("Invalid unit type.");
-      }
+      addUnitOfUnitType(unitType, name, health);
     }
+  }
 
-    this.addAll(unitList);
+  /**
+   * Adds unit of unit type to army.
+   *
+   * @param unitType - UnitType of army unit
+   * @param unitName - Name of the unit
+   * @param health - Unit health
+   */
+  public void addUnitOfUnitType(UnitType unitType, String unitName, int health) {
+    switch (unitType) {
+      case RANGED -> this.units.add(new RangedUnit(unitName, health));
+      case CAVALRY -> this.units.add(new CavalryUnit(unitName, health));
+      case INFANTRY -> this.units.add(new InfantryUnit(unitName, health));
+      case COMMANDER -> this.units.add(new CommanderUnit(unitName, health));
+      default -> logger.info("Invalid unit type given");
+    }
+  }
+
+  /**
+   * Get the UnitType of a specified unit.
+   *
+   * @param unit - unit to get UnitType for
+   * @return UnitType of specified unit
+   */
+  public UnitType getUnitType(Unit unit) {
+    return switch (unit.getClass().getSimpleName()) {
+      case "CavalryUnit" -> UnitType.CAVALRY;
+      case "CommanderUnit" -> UnitType.COMMANDER;
+      case "InfantryUnit" -> UnitType.INFANTRY;
+      case "RangedUnit" -> UnitType.RANGED;
+      default -> UnitType.UNKNOWN;
+    };
   }
 
   /**
@@ -143,7 +177,7 @@ public class Army {
   public List<Unit> getInfantryUnits() {
     return this.units.stream()
             .filter(unit -> unit.getClass().equals(InfantryUnit.class))
-            .collect(Collectors.toList());
+            .toList();
   }
 
   /**
@@ -154,7 +188,7 @@ public class Army {
   public List<Unit> getCavalryUnits() {
     return this.units.stream()
             .filter(unit -> unit.getClass().equals(CavalryUnit.class))
-            .collect(Collectors.toList());
+            .toList();
   }
 
   /**
@@ -165,7 +199,7 @@ public class Army {
   public List<Unit> getRangedUnit() {
     return this.units.stream()
             .filter(unit -> unit.getClass().equals(RangedUnit.class))
-            .collect(Collectors.toList());
+            .toList();
   }
 
   /**
@@ -176,7 +210,7 @@ public class Army {
   public List<Unit> getCommanderUnits() {
     return this.units.stream()
             .filter(unit -> unit.getClass().equals(CommanderUnit.class))
-            .collect(Collectors.toList());
+            .toList();
   }
 
   /**

@@ -1,5 +1,6 @@
 package no.ntnu.iir.wargames;
 
+import no.ntnu.iir.wargames.models.Unit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

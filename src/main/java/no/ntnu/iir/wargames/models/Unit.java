@@ -1,4 +1,4 @@
-package no.ntnu.iir.wargames;
+package no.ntnu.iir.wargames.models;
 
 /**
  * Unit is a template for creating other units.
@@ -12,6 +12,7 @@ public abstract class Unit {
   private int health;
   private int attack;
   private int armor;
+  // add range ?
 
   /**
    * Unit constructor.
@@ -30,7 +31,9 @@ public abstract class Unit {
 
   /**
    * Deals damage to specified unit with the following formula:
-   * health_opponent = health_opponent - ( attack + attackBonus )_this + ( armor + resistBonus)_opponent.
+   * health_opponent = health_opponent
+   *                  - ( attack + attackBonus )_this
+   *                  + ( armor + resistBonus )_opponent.
    *
    * @param opponent - unit to attack
    */

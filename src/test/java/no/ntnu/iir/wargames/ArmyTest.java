@@ -1,6 +1,8 @@
 package no.ntnu.iir.wargames;
 
-import no.ntnu.iir.wargames.units.InfantryUnit;
+import no.ntnu.iir.wargames.models.Army;
+import no.ntnu.iir.wargames.models.Unit;
+import no.ntnu.iir.wargames.models.units.InfantryUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

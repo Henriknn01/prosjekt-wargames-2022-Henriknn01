@@ -1,4 +1,4 @@
-package no.ntnu.iir.wargames;
+package no.ntnu.iir.wargames.models;
 
 /**
  * Simulates a battle between two armies using a turn based system,
