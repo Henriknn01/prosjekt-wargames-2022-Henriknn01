@@ -6,7 +6,7 @@ package no.ntnu.iir.wargames.models;
  * @author Henrik Norheim Nysæther
  * @version 20.02.2022
  */
-public abstract class Unit {
+public abstract class Unit extends Actor {
   // Class fields
   private String name;
   private int health;
