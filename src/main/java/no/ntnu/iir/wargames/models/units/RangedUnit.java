@@ -76,4 +76,9 @@ public class RangedUnit extends Unit {
       }
     }
   }
+
+  @Override
+  public void onUpdate() {
+
+  }
 }
