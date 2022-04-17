@@ -1,5 +1,6 @@
 package no.ntnu.iir.wargames.models;
 
+import com.google.common.annotations.Beta;
 import com.google.common.primitives.Doubles;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -44,6 +45,11 @@ public abstract class Actor {
     this.y = y;
   }
 
+  public void setXY(double x, double y) {
+    this.x = x;
+    this.y = y;
+  }
+
   public Color getColor() {
     return color;
   }
@@ -62,6 +68,13 @@ public abstract class Actor {
 
   public double getMovementSpeed() {
     return movementSpeed;
+  }
+
+  @Beta
+  public double getDistance(double[] positionOne, double[] positionTwo) {
+    return Math.sqrt(
+        Math.pow((positionOne[0] + positionTwo[0]), 2) + Math.pow((positionOne[1] + positionTwo[1]), 2)
+    );
   }
 
   /**
