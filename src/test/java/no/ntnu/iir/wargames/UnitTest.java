@@ -23,6 +23,9 @@ class UnitTest {
             public int getResistBonus() {
                 return 2;
             }
+
+            @Override
+            public void onUpdate() {}
         };
 
         testOpponent = new Unit("Test opponent", 100, 20, 10) {
@@ -35,6 +38,9 @@ class UnitTest {
             public int getResistBonus() {
                 return 2;
             }
+
+            @Override
+            public void onUpdate() {}
         };
     }
 
