@@ -79,6 +79,15 @@ public class RangedUnit extends Unit {
 
   @Override
   public void onUpdate() {
-
+    if (this.hasTarget() && this.getTarget() != null) {
+      if (this.isInRange(this.getTarget().getPosition())) {
+        this.attack(this.getTarget());
+        if (this.getTarget().getHealth() <= 0) {
+          this.setTarget(null);
+        }
+      } else {
+        this.moveTowardPosition(this.getTarget().getPosition());
+      }
+    }
   }
 }
