@@ -12,7 +12,8 @@ public abstract class Unit extends Actor {
   private int health;
   private int attack;
   private int armor;
-  // add range ?
+  private Unit target;
+  private double range;
 
   /**
    * Unit constructor.
@@ -27,6 +28,7 @@ public abstract class Unit extends Actor {
     this.health = health;
     this.attack = attack;
     this.armor = armor;
+    this.target = null;
   }
 
   /**
@@ -88,6 +90,31 @@ public abstract class Unit extends Actor {
    */
   public void setHealth(int health) {
     this.health = health;
+  }
+
+  public boolean hasTarget() {
+    return true;
+  }
+
+  public Unit getTarget() {
+    return this.target;
+  }
+
+  public void setTarget(Unit target) {
+    this.target = target;
+  }
+
+  public double getRange() {
+    return range;
+  }
+
+  public void setRange(double range) {
+    this.range = range;
+  }
+
+  public boolean isInRange(double[] position) {
+    double distance = Math.abs(this.getDistance(this.getPosition(), position));
+    return distance <= this.getRange();
   }
 
   /**
