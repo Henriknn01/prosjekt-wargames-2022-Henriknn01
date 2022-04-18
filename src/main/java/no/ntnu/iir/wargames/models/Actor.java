@@ -45,7 +45,7 @@ public abstract class Actor {
     this.y = y;
   }
 
-  public void setXY(double x, double y) {
+  public void setPosition(double x, double y) {
     this.x = x;
     this.y = y;
   }
