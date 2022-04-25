@@ -91,7 +91,7 @@
     </MenuBar>
     <AnchorPane VBox.vgrow="ALWAYS">
       <children>
-        <Canvas height="415.0" width="454.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="canvas" />
+        <Canvas height="415.0" width="454.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="canvas"/>
         <LineChart layoutX="453.0" layoutY="235.0" prefHeight="180.0" prefWidth="219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="235.0">
           <xAxis>
             <CategoryAxis side="BOTTOM" />

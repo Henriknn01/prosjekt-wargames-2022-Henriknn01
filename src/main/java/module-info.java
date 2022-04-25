@@ -4,6 +4,7 @@ module wargames {
   requires com.opencsv;
   requires org.apache.logging.log4j;
   requires com.google.common;
+  requires java.desktop;
 
   opens no.ntnu.iir.wargames to javafx.fxml;
   exports no.ntnu.iir.wargames;

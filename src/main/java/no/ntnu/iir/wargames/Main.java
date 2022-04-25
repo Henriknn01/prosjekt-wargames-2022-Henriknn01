@@ -57,10 +57,13 @@ public class Main extends Application {
       Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainPage.fxml"));
       primaryStage.setTitle("Battle simulation");
       Scene scene = new Scene(root, 640, 430);
+      scene.getStylesheets().add("style.css");
       primaryStage.setScene(scene);
       primaryStage.show();
     } catch (Exception e) {
+      e.printStackTrace();
       System.out.println("error loading fxml file");
+      System.exit(0);
     }
   }
 }

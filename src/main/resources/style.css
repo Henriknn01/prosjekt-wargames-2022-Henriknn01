@@ -1,0 +1,8 @@
+#myCanvas {
+    -fx-background-image: url("generatedMap.png");
+    -fx-background-color: aqua;
+    background-color: aqua;
+}
+.text-field {
+    -fx-background-color: red;
+}

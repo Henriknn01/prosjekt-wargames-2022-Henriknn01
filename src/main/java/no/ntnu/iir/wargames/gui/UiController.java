@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
@@ -23,7 +24,9 @@ public class UiController implements Initializable {
     //System.out.println("You clicked me!");
     //label.setText("Hello World!");
     GraphicsContext gc = canvas.getGraphicsContext2D();
-    gc.setStroke(Color.FORESTGREEN.brighter());
+    Image map = new Image("generatedMap.png");
+    gc.drawImage(map, 0, 0);
+    gc.setStroke(Color.BLUE.brighter());
     gc.setLineWidth(2);
     gc.strokeOval(30, 30, 80, 80);
     gc.fillOval(10, 10, 4, 4);

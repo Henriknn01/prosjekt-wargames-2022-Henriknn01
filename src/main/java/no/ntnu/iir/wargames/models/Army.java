@@ -129,6 +129,7 @@ public class Army {
    * @param health - health of the units
    * @param unitType - the type of unit to generate
    */
+  // TODO: return list instead of adding units directly ot army.
   public void generateUnits(int unitSize, String name, int health, UnitType unitType) {
     ArrayList<Unit> unitList = new ArrayList<>();
     for (int i = 0; i < unitSize; i++) {
