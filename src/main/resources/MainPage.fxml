@@ -48,7 +48,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.layout.GridPane?>
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.iir.wargames.gui.UiController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="no.ntnu.iir.wargames.gui.UiController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>

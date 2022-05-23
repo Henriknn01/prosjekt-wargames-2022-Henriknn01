@@ -37,43 +37,90 @@ public abstract class Actor {
     setTokenSize(5);
   }
 
+  /**
+   * Sets x position.
+   *
+   * @param x new x position
+   */
   public void setX(double x) {
     this.x = x;
   }
 
+  /**
+   * Sets y position.
+   *
+   * @param y new y position
+   */
   public void setY(double y) {
     this.y = y;
   }
 
+  /**
+   * Sets position to specified x, y position.
+   *
+   * @param x new x position
+   * @param y new y position
+   */
   public void setPosition(double x, double y) {
     this.x = x;
     this.y = y;
   }
 
+  /**
+   * Get color of actor.
+   *
+   * @return color
+   */
   public Color getColor() {
     return color;
   }
 
+  /**
+   * Gets actors token size.
+   *
+   * @return token size
+   */
   public double getTokenSize() {
     return tokenSize;
   }
 
+  /**
+   * Sets the color of the actor to specified color.
+   *
+   * @param color color of the actor
+   */
   public void setColor(Color color) {
     this.color = color;
   }
 
+  /**
+   * Sets the token size to specified size.
+   *
+   * @param tokenSize size of token
+   */
   public void setTokenSize(double tokenSize) {
     this.tokenSize = tokenSize;
   }
 
+  /**
+   * Gets the movement speed of the actor.
+   *
+   * @return movement speed
+   */
   public double getMovementSpeed() {
     return movementSpeed;
   }
 
-  @Beta
+  /**
+   * Gets the distance between two positions.
+   *
+   * @param positionOne position one
+   * @param positionTwo position two
+   * @return distance between positions
+   */
   public double getDistance(double[] positionOne, double[] positionTwo) {
     return Math.sqrt(
-        Math.pow((positionOne[0] + positionTwo[0]), 2) + Math.pow((positionOne[1] + positionTwo[1]), 2)
+        Math.pow((positionTwo[0] - positionOne[0]), 2) + Math.pow((positionTwo[1] - positionOne[1]), 2)
     );
   }
 
@@ -90,10 +137,20 @@ public abstract class Actor {
     }
   }
 
+  /**
+   * Get x position.
+   *
+   * @return x position
+   */
   public double getX() {
     return x;
   }
 
+  /**
+   * Get y position.
+   *
+   * @return y position
+   */
   public double getY() {
     return y;
   }
@@ -124,8 +181,8 @@ public abstract class Actor {
     };
 
     // sets the new x and y coordinates
-    setX(currentPosition[0] + movementVector[0]);
-    setY(currentPosition[0] + movementVector[1]);
+    setX(currentPosition[0] - movementVector[0]);
+    setY(currentPosition[0] - movementVector[1]);
   }
 
   /**
@@ -150,6 +207,5 @@ public abstract class Actor {
   }
 
   // what actor will do when an update occurs.
-  // TODO: implement onUpdate with unit classes
   public abstract void onUpdate();
 }

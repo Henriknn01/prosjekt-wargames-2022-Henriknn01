@@ -1,7 +1,7 @@
 package no.ntnu.iir.wargames.models;
 
 /**
- * Unit is a template for creating other units.
+ * Unit is the base for other units units.
  *
  * @author Henrik Norheim Nysæther
  * @version 20.02.2022
@@ -14,6 +14,7 @@ public abstract class Unit extends Actor {
   private int armor;
   private Unit target;
   private double range;
+  private TerrainType terrainType;
 
   /**
    * Unit constructor.
@@ -23,11 +24,12 @@ public abstract class Unit extends Actor {
    * @param attack - the amount of damage a unit does on attack
    * @param armor - armor bonus for when the unit gets hit
    */
-  protected Unit(String name, int health, int attack, int armor) {
+  protected Unit(String name, int health, int attack, int armor, double range) {
     this.name = name;
     this.health = health;
     this.attack = attack;
     this.armor = armor;
+    this.range = range;
     this.target = null;
   }
 
@@ -37,14 +39,18 @@ public abstract class Unit extends Actor {
    *                  - ( attack + attackBonus )_this
    *                  + ( armor + resistBonus )_opponent.
    *
+   * Note: added terrain bonus to the attack formula.
+   *
    * @param opponent - unit to attack
    */
   public void attack(Unit opponent) {
     opponent.health -= (
           (this.attack
-          + this.getAttackBonus())
+          + this.getAttackBonus()
+          + this.getTerrainBonus()[0])
           + (opponent.getArmor()
-          + opponent.getResistBonus()));
+          + opponent.getResistBonus()
+          + opponent.getTerrainBonus()[1]));
   }
 
   /**
@@ -92,26 +98,75 @@ public abstract class Unit extends Actor {
     this.health = health;
   }
 
+  /**
+   * Checks if the unit has a target.
+   *
+   * @return boolean - true if unit has target
+   */
   public boolean hasTarget() {
-    return true;
+    return (target != null);
   }
 
+  /**
+   * Gets the target of the unit.
+   *
+   * @return target
+   */
   public Unit getTarget() {
     return this.target;
   }
 
+  /**
+   * Sets the target of the unit to a specified unit.
+   *
+   * @param target target unit
+   */
   public void setTarget(Unit target) {
     this.target = target;
   }
 
+  /**
+   * Gets the unit range.
+   *
+   * @return range
+   */
   public double getRange() {
     return range;
   }
 
+  /**
+   * Sets the unit range to specified range.
+   *
+   * @param range new range
+   */
   public void setRange(double range) {
     this.range = range;
   }
 
+  /**
+   * Sets the terrain type of the unit.
+   *
+   * @param terrainType terrain type
+   */
+  public void setTerrainType(TerrainType terrainType) {
+    this.terrainType = terrainType;
+  }
+
+  /**
+   * Gets the terrain type the unit is standing on.
+   *
+   * @return Terrain type
+   */
+  public TerrainType getTerrainType() {
+    return this.terrainType;
+  }
+
+  /**
+   * Checks if specified position is within the range of the unit.
+   *
+   * @param position position to check if is inside range
+   * @return true if position is inside the range
+   */
   public boolean isInRange(double[] position) {
     double distance = Math.abs(this.getDistance(this.getPosition(), position));
     return distance <= this.getRange();
@@ -130,6 +185,13 @@ public abstract class Unit extends Actor {
   }
 
   /**
+   * Gets the unit terrain bouns
+   *
+   * @return terrain bonus
+   */
+  public abstract int[] getTerrainBonus();
+
+  /**
    * The attack bonus is calculated in different ways for each unit.
    * Attack bonus is used to calculate how much damage a unit deals on attack.
    *
@@ -144,4 +206,22 @@ public abstract class Unit extends Actor {
    * @return resist bonus
    */
   public abstract int getResistBonus();
+
+  /**
+   * Method controlls what every unit does on a simulation update.
+   */
+  @Override
+  public void onUpdate() {
+    // Checks if the unit has a target, if no target is found then it will get a new one.
+    if (this.hasTarget() && this.getTarget() != null) {
+      // Checks if the unit is within the range of target unit
+      if (this.isInRange(this.getTarget().getPosition())) {
+        // Attack the target unit if within range.
+        this.attack(this.getTarget());
+      } else {
+        // Move closer to target if the target is outside the range of the unit.
+        this.moveTowardPosition(this.getTarget().getPosition());
+      }
+    }
+  }
 }

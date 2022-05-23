@@ -122,6 +122,21 @@ public class Army {
   }
 
   /**
+   * Sets the start position of the army.
+   *
+   * @param x x coordinate of the unit
+   * @param y y coordinate of the unit
+   */
+  public void setStartPosition(double x, double y) {
+    Random random = new Random();
+    double yPosition = 0;
+    for (Unit unit : this.units) {
+      yPosition = random.nextDouble(y);
+      unit.setPosition(x, yPosition);
+    }
+  }
+
+  /**
    * Generates a list of units with specified name, health and unit type.
    *
    * @param unitSize - amount of units to generate and add to list
@@ -129,9 +144,7 @@ public class Army {
    * @param health - health of the units
    * @param unitType - the type of unit to generate
    */
-  // TODO: return list instead of adding units directly ot army.
   public void generateUnits(int unitSize, String name, int health, UnitType unitType) {
-    ArrayList<Unit> unitList = new ArrayList<>();
     for (int i = 0; i < unitSize; i++) {
       addUnitOfUnitType(unitType, name, health);
     }

@@ -1,15 +1,18 @@
 package no.ntnu.iir.wargames.models.units;
 
 import no.ntnu.iir.wargames.models.Unit;
+import no.ntnu.iir.wargames.models.UnitFactory;
 
 /**
  * CavalryUnit class extends Unit class to create a specialized unit.
  * Cavalry unit default values, specified in the spec sheet:
  *      attack: 20,
  *      armor: 12
+ * Other default values:
+ *      range: 100
  *
  * @author Henrik Norheim Nysæther
- * @version 21.02.2022
+ * @version 21.05.2022
  */
 public class CavalryUnit extends Unit {
   // class fields
@@ -22,9 +25,10 @@ public class CavalryUnit extends Unit {
    * @param health - health of the unit
    * @param attack - the amount of damage a unit does on attack
    * @param armor - armor bonus for when the unit gets hit
+   * @param range - attack range of the unit
    */
-  public CavalryUnit(String name, int health, int attack, int armor) {
-    super(name, health, attack, armor);
+  public CavalryUnit(String name, int health, int attack, int armor, double range) {
+    super(name, health, attack, armor, range);
   }
 
   /**
@@ -35,7 +39,7 @@ public class CavalryUnit extends Unit {
    * @param health - health of the unit
    */
   public CavalryUnit(String name, int health) {
-    super(name, health, 20, 12);
+    super(name, health, 20, 12, 100);
   }
 
   /**
@@ -63,8 +67,28 @@ public class CavalryUnit extends Unit {
     return 1;
   }
 
+  /**
+   * Bonus is given in like an array like this [attack, armor].
+   *
+   * @return 2d array with values [attack, armor]
+   */
   @Override
-  public void onUpdate() {
-
+  public int[] getTerrainBonus() {
+    int[] bonus = new int[2];
+    switch (this.getTerrainType()) {
+      case HILL: {
+        bonus[0] = 0; // attack bonus
+        bonus[1] = 0; // armor bonus
+      }
+      case FOREST: {
+        bonus[0] = 0;
+        bonus[1] = -this.getResistBonus();
+      }
+      case PLAINS: {
+        bonus[0] = 6;
+        bonus[1] = 0;
+      }
+    }
+    return bonus;
   }
 }

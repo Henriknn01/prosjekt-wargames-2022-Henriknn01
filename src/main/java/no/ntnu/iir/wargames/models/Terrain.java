@@ -8,8 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-// source: https://cbrgm.net/post/2017-07-03-procedual-map-generation-part2/
-
 public class Terrain {
   private int octaves;
   private double roughness;
@@ -17,26 +15,49 @@ public class Terrain {
   private OpenSimplexNoise openSimplexNoise;
   private long seed;
   private final int pixelScale = 1;
+  private double[][] terrainArray;
 
   Random random = new Random();
 
+  /**
+   * Terrain constructor
+   *
+   * @param octaves Number of Layers combined together to get a natural looking surface
+   * @param roughness Increasing the of the range between -1 and 1, causing higher values eg. more rough terrain
+   * @param scale Overall scaling of the terrain
+   */
   public Terrain(int octaves, double roughness, double scale) {
-    this.octaves = octaves; // Number of Layers combined together to get a natural looking surface
-    this.roughness = roughness; // Increasing the of the range between -1 and 1, causing higher values eg more
-    // rough terrain
-    this.scale = scale; // Overall scaling of the terrain
+    this.octaves = octaves;
+    this.roughness = roughness;
+    this.scale = scale;
     this.openSimplexNoise = new OpenSimplexNoise(random.nextInt(Integer.MAX_VALUE));
   }
 
+  /**
+   * Terrain constructor
+   *
+   * @param seed Seed used to generate the terrain
+   * @param octaves Number of Layers combined together to get a natural looking surface
+   * @param roughness Increasing the of the range between -1 and 1, causing higher values eg. more rough terrain
+   * @param scale Overall scaling of the terrain
+   */
   public Terrain(long seed, int octaves, double roughness, double scale) {
-    this.octaves = octaves; // Number of Layers combined together to get a natural looking surface
-    this.roughness = roughness; // Increasing the of the range between -1 and 1, causing higher values eg more
-    // rough terrain
-    this.scale = scale; // Overall scaling of the terrain
+    this.octaves = octaves;
+    this.roughness = roughness;
+    this.scale = scale;
     this.seed = seed;
     this.openSimplexNoise = new OpenSimplexNoise(seed);
   }
 
+  /**
+   * Gets the type of terrain on specified x, y position.
+   *
+   * @param terrain Terrain
+   * @param x x position
+   * @param y y position
+   * @return TerrainType of specified position
+   */
+  // TODO: Add error handeling if position is outside the map
   public TerrainType getTerrainType(double[][] terrain, int x, int y) {
     TerrainType terrainType = null; // sets the default terrain type to be returned
     if (terrain[x][y] <= 0) {
@@ -49,28 +70,70 @@ public class Terrain {
     return terrainType;
   }
 
-  public double[][] createWorld(int width, int height) {
-    return generateOctavedSimplexNoise(width, height);
+  /**
+   * Gets the type of terrain on specified x, y position using stored terrain array.
+   *
+   * @param x x position
+   * @param y y position
+   * @return TerrainType of specified position
+   */
+  // TODO: Add error handeling if position is outside the map
+  public TerrainType getTerrainType(int x, int y) {
+    TerrainType terrainType = null; // sets the default terrain type to be returned
+    try {
+      if (terrainArray[x][y] <= 0) {
+        terrainType = TerrainType.PLAINS;
+      } else if (terrainArray[x][y] > 0 && terrainArray[x][y] <= 0.6f) {
+        terrainType = TerrainType.FOREST;
+      } else if (terrainArray[x][y] > 0.6f) {
+        terrainType = TerrainType.HILL;
+      }
+    } catch (ArrayIndexOutOfBoundsException e) {
+    }
+    return terrainType;
   }
 
+  /**
+   * Gets the 2d terrain array.
+   *
+   * @return 2D array with values representing the height of the terrain.
+   */
+  public double[][] getTerrainArray() {
+    return terrainArray;
+  }
+
+  /**
+   * Creates a terrain with specified height and width
+   *
+   * @param width width of terrain
+   * @param height height of terrain
+   * @return 2D array with values representing the height of the terrain.
+   */
+  public double[][] createWorld(int width, int height) {
+    this.terrainArray = generateOctavedSimplexNoise(width, height);
+    return terrainArray;
+  }
+
+  /**
+   * Generates the simplex noise used for the terrain.
+   *
+   * @param width width of the terrain
+   * @param height height of the terrain
+   * @return
+   */
   private double[][] generateOctavedSimplexNoise(int width, int height) {
     double[][] totalNoise = new double[width][height];
     double layerFrequency = this.scale;
     double layerWeight = 1;
     double weightSum = 0;
 
-    // Summing up all octaves, the whole expression makes up a weighted average
-    // computation where the noise with the lowest frequencies have the least effect
-
     for (int octave = 0; octave < this.octaves; octave++) {
-      // Calculate single layer/octave of simplex noise, then add it to total noise
       for (int x = 0; x < width; x++) {
         for (int y = 0; y < height; y++) {
           totalNoise[x][y] += openSimplexNoise.eval(x * layerFrequency, y * layerFrequency) * layerWeight;
         }
       }
 
-      // Increase variables with each incrementing octave
       layerFrequency *= 2;
       weightSum += layerWeight;
       layerWeight *= this.roughness;
@@ -150,7 +213,7 @@ public class Terrain {
     // that it is using.
     graphics2D.dispose();
     // Save as PNG
-    File file = new File(filename + ".png");
+    File file = new File("src/main/resources/" + filename + ".png");
     try {
       ImageIO.write(bufferedImage, "png", file);
     } catch (IOException e) {

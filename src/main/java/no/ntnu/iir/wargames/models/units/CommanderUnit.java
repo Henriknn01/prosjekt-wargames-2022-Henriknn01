@@ -1,5 +1,7 @@
 package no.ntnu.iir.wargames.models.units;
 
+import no.ntnu.iir.wargames.models.UnitFactory;
+
 /**
  * CommanderUnit class extends CavalryUnit.
  * Commander unit default values, specified in the spec sheet:
@@ -18,8 +20,8 @@ public class CommanderUnit extends CavalryUnit {
    * @param attack - the amount of damage a unit does on attack
    * @param armor - armor bonus for when the unit gets hit
    */
-  public CommanderUnit(String name, int health, int attack, int armor) {
-    super(name, health, attack, armor);
+  public CommanderUnit(String name, int health, int attack, int armor, double range) {
+    super(name, health, attack, armor, range);
   }
 
   /**
@@ -30,6 +32,6 @@ public class CommanderUnit extends CavalryUnit {
    * @param health - health of the unit
    */
   public CommanderUnit(String name, int health) {
-    super(name, health, 25, 15);
+    super(name, health, 25, 15, 100);
   }
 }

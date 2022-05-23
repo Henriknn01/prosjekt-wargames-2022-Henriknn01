@@ -13,7 +13,7 @@ class UnitTest {
 
     @BeforeEach
     void setUp() {
-        testUnit = new Unit("Test unit", 100, 20, 10) {
+        testUnit = new Unit("Test unit", 100, 20, 10, 100) {
             @Override
             public int getAttackBonus() {
                 return 1;
@@ -22,13 +22,21 @@ class UnitTest {
             @Override
             public int getResistBonus() {
                 return 2;
+            }
+
+            @Override
+            public int[] getTerrainBonus() {
+                int[] i = new int[2];
+                i[0] = 3;
+                i[1] = 4;
+                return i;
             }
 
             @Override
             public void onUpdate() {}
         };
 
-        testOpponent = new Unit("Test opponent", 100, 20, 10) {
+        testOpponent = new Unit("Test opponent", 100, 20, 10, 100) {
             @Override
             public int getAttackBonus() {
                 return 1;
@@ -37,6 +45,14 @@ class UnitTest {
             @Override
             public int getResistBonus() {
                 return 2;
+            }
+
+            @Override
+            public int[] getTerrainBonus() {
+                int[] i = new int[2];
+                i[0] = 3;
+                i[1] = 4;
+                return i;
             }
 
             @Override
