@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Terrain {
   private int octaves;
@@ -16,6 +18,8 @@ public class Terrain {
   private long seed;
   private final int pixelScale = 1;
   private double[][] terrainArray;
+
+  private static final Logger logger = LogManager.getLogger(Terrain.class);
 
   Random random = new Random();
 
@@ -89,6 +93,7 @@ public class Terrain {
         terrainType = TerrainType.HILL;
       }
     } catch (ArrayIndexOutOfBoundsException e) {
+      logger.error(e);
     }
     return terrainType;
   }
@@ -195,7 +200,6 @@ public class Terrain {
       for (int y = 0; y < array[x].length; y++) {
 
         //Defining coloring rules for each value
-        //You may also use enums with switch case here
 
         if (getTerrainType(array, x, y) == TerrainType.PLAINS) {
           graphics2D.setColor(Color.GREEN);
